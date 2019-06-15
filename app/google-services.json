@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1083306378990",
+    "firebase_url": "https://personal-expense-a0bf0.firebaseio.com",
+    "project_id": "personal-expense-a0bf0",
+    "storage_bucket": "personal-expense-a0bf0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083306378990:android:32cf612d82c4f5fa",
+        "android_client_info": {
+          "package_name": "mobi.toan.personalexpense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083306378990-09ip6g6sqno815lsmmak35515tvgoj44.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mobi.toan.personalexpense",
+            "certificate_hash": "533200c92d9636eb6a254b8d15147e63cc2194e2"
+          }
+        },
+        {
+          "client_id": "1083306378990-vo324h9j4mt6uaia2qiaksd6hr4u9svb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQG-SKlVFj4QIkGPmCtKzPFwZq3HziH38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083306378990-vo324h9j4mt6uaia2qiaksd6hr4u9svb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
