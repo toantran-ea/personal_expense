@@ -59,8 +59,17 @@ class MainActivity : AppCompatActivity() {
         viewModel.recordList()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ items -> viewAdapter.updateRecords(items)},
-                {t: Throwable? -> Log.e(TAG, t?.message) })
+            .subscribe({ items -> viewAdapter.updateRecords(items) },
+                { t: Throwable? -> Log.e(TAG, t?.message) })
+            .also { compositeDisposable.add(it) }
+        viewModel.daysSum()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                today_cost_text.text = it.first.toString()
+                yesterday_cost_text.text = it.second.toString()
+            },
+                { t: Throwable? -> Log.e(TAG, t?.message) })
             .also { compositeDisposable.add(it) }
     }
 
@@ -76,7 +85,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
@@ -88,6 +97,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val  TAG = "MainActivity"
+        const val TAG = "MainActivity"
     }
 }

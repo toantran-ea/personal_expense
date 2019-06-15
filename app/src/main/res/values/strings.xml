@@ -5,4 +5,6 @@
     <string name="expense_for">For?</string>
     <string name="save_ok">Save record ok!</string>
     <string name="today">Today</string>
+    <string name="total">Total:</string>
+    <string name="yesterday">Yesterday</string>
 </resources>
