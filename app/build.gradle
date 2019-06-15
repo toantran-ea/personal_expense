@@ -48,6 +48,9 @@ dependencies {
     implementation deps.rx_android
     implementation deps.rxjava2
 
+    // recyclerview
+    implementation deps.support.recyclerview
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
