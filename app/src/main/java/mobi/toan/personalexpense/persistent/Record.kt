@@ -16,5 +16,14 @@ data class Record(
     val note: String,
 
     @ColumnInfo(name = "amount")
-    val amount: Double
+    val amount: Double,
+
+    @ColumnInfo(name = "created")
+    val created: Long = Calendar.getInstance().timeInMillis,
+
+    @ColumnInfo(name = "updated")
+    val updated: Long = Calendar.getInstance().timeInMillis,
+
+    @ColumnInfo(name = "date")
+    val date: Long = Calendar.getInstance().timeInMillis
 )

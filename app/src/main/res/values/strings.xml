@@ -4,4 +4,5 @@
     <string name="how_much">How much?</string>
     <string name="expense_for">For?</string>
     <string name="save_ok">Save record ok!</string>
+    <string name="today">Today</string>
 </resources>
