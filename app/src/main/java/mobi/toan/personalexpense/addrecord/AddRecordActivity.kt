@@ -1,6 +1,7 @@
 package mobi.toan.personalexpense.addrecord
 
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,8 @@ import mobi.toan.personalexpense.Injection
 import mobi.toan.personalexpense.R
 import mobi.toan.personalexpense.ViewModelFactory
 import mobi.toan.personalexpense.persistent.Record
+import mobi.toan.personalexpense.utils.NumberUtils
+import mobi.toan.personalexpense.utils.VoidTextWatcher
 
 class AddRecordActivity : AppCompatActivity() {
     private lateinit var viewModelFactory: ViewModelFactory
@@ -34,6 +37,11 @@ class AddRecordActivity : AppCompatActivity() {
             val text = note_input.text.toString().trim()
             saveRecord(cost, text)
         }
+        amount_input.addTextChangedListener(object : VoidTextWatcher() {
+            override fun afterTextChanged(p0: Editable?) {
+                preview_amount.text = NumberUtils.displayFormatedNumber((p0?.toString() ?: "0").toDouble())
+            }
+        })
     }
 
     private fun saveRecord(cost: Double, text: String) {

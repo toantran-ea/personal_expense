@@ -2,6 +2,7 @@ package mobi.toan.personalexpense.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
 import mobi.toan.personalexpense.persistent.Record
@@ -31,5 +32,9 @@ class RecordListViewModel(private val dataSource: RecordDao) : ViewModel() {
                     Pair(today.sum(), yesterday.sum())
                 }
             )
+    }
+
+    fun deleteNoteById(id: String) {
+        return dataSource.deleteByIdSync(id)
     }
 }

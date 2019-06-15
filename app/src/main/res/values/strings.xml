@@ -7,4 +7,8 @@
     <string name="today">Today</string>
     <string name="total">Total:</string>
     <string name="yesterday">Yesterday</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="delete_msg">This will delete your record forever.</string>
 </resources>

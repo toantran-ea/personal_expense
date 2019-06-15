@@ -51,6 +51,9 @@ dependencies {
     // recyclerview
     implementation deps.support.recyclerview
 
+    // dialog
+    implementation 'com.afollestad.material-dialogs:core:3.0.0-rc3'
+
     // debug database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 

@@ -35,7 +35,8 @@
             <TextView
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/label_today_total"
-                android:textSize="20sp"
+                android:textSize="16sp"
+                android:textColor="@color/main_value"
                 android:id="@+id/today_cost_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +52,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:layout_centerHorizontal="true"
-                android:textSize="20sp"
+                android:textSize="14sp"
                 android:id="@+id/label_yesterday_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +61,8 @@
             <TextView
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/label_yesterday_total"
-                android:textSize="20sp"
+                android:textSize="16sp"
+                android:textColor="@color/main_value"
                 android:id="@+id/yesterday_cost_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -70,6 +72,8 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
         app:layout_constraintTop_toBottomOf="@+id/summary_section"
         android:id="@+id/record_list"
         android:layout_width="match_parent"

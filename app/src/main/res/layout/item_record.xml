@@ -1,27 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:padding="4dp"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="1dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <TextView
+    <LinearLayout
+        android:weightSum="10"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/note"
-        tools:text="this is sample note"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_marginTop="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/amount"
-        tools:text="200.000 VND"/>
+        <LinearLayout
+            android:background="#eee"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="8.5"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/note"
+                tools:text="this is sample note"/>
 
-    <TextView
-        android:layout_marginTop="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/date"
-        tools:text="Yesterday"/>
-</LinearLayout>
+            <TextView
+                android:textColor="@color/number_regular"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/amount"
+                tools:text="200.000 VND"/>
+
+            <TextView
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/date"
+                tools:text="Yesterday"/>
+        </LinearLayout>
+        <ImageView
+            android:padding="12dp"
+            android:background="@color/item_bg"
+            android:src="@drawable/delete"
+            android:layout_weight="1.5"
+            android:id="@+id/delete_note"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+

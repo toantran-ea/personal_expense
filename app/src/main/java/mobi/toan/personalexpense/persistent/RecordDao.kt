@@ -10,7 +10,7 @@ import java.util.*
 
 @Dao
 interface RecordDao {
-    @Query("SELECT * FROM records")
+    @Query("SELECT * FROM records ORDER BY updated DESC")
     fun getAllRecords(): Single<List<Record>>
 
     @Query("SELECT * FROM records WHERE recordid = :id")
@@ -21,6 +21,9 @@ interface RecordDao {
 
     @Query("DELETE FROM records")
     fun deteleAllRecords():  Completable
+
+    @Query("DELETE FROM records where recordid = :id")
+    fun deleteByIdSync(id: String)
 
     @Query("SELECT amount from records WHERE date BETWEEN :start AND :end")
     fun sumPeriod(start: Date, end: Date): Single<List<Double>>
