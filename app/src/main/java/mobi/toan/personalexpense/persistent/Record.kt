@@ -19,11 +19,14 @@ data class Record(
     val amount: Double,
 
     @ColumnInfo(name = "created")
-    val created: Long = Calendar.getInstance().timeInMillis,
+    val created: Date = Calendar.getInstance().time,
 
     @ColumnInfo(name = "updated")
-    val updated: Long = Calendar.getInstance().timeInMillis,
+    val updated: Date = Calendar.getInstance().time,
 
     @ColumnInfo(name = "date")
-    val date: Long = Calendar.getInstance().timeInMillis
+    val date: Date = Calendar.getInstance().time,
+
+    @ColumnInfo(name = "currency")
+    val currency: String = CurrencyType.VND.text
 )

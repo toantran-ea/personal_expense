@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import io.reactivex.Completable
 import io.reactivex.Single
+import java.util.*
 
 @Dao
 interface RecordDao {
@@ -20,4 +21,7 @@ interface RecordDao {
 
     @Query("DELETE FROM records")
     fun deteleAllRecords():  Completable
+
+    @Query("SELECT amount from records WHERE date BETWEEN :start AND :end")
+    fun sumPeriod(start: Date, end: Date): Single<List<Double>>
 }

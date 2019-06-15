@@ -33,7 +33,7 @@ class RecordAdapter(private val records: MutableList<Record> = ArrayList()) :
         val record = records[position]
         holder.amountText.text = record.amount.toString()
         holder.noteText.text = record.note
-        holder.dateText.text = displayBeautyDate(holder.itemView.context, record.date)
+        holder.dateText.text = displayBeautyDate(holder.itemView.context, record.date.time)
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
