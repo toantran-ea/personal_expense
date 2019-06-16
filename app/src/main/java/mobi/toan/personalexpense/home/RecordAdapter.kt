@@ -18,7 +18,9 @@ import kotlin.collections.ArrayList
 class RecordAdapter(private val records: MutableList<Record> = ArrayList()) :
     RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
 
-    private val publishSubject: PublishSubject<String> = PublishSubject.create()
+    private val publishSubjectForDelete: PublishSubject<String> = PublishSubject.create()
+
+    private val publishSubjectForEdit: PublishSubject<String> = PublishSubject.create()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val recordView = LayoutInflater
@@ -28,7 +30,12 @@ class RecordAdapter(private val records: MutableList<Record> = ArrayList()) :
     }
 
     fun onItemDeleted(): Observable<String> {
-        return publishSubject.hide()
+        return publishSubjectForDelete.hide()
+    }
+
+
+    fun onItemEdited(): Observable<String> {
+        return publishSubjectForEdit.hide()
     }
 
     fun updateRecords(updated: List<Record>) {
@@ -47,7 +54,11 @@ class RecordAdapter(private val records: MutableList<Record> = ArrayList()) :
         holder.noteText.text = record.note
         holder.dateText.text = displayBeautyDate(holder.itemView.context, record.date.time)
         holder.deleteNote.setOnClickListener {
-            publishSubject.onNext(record.id)
+            publishSubjectForDelete.onNext(record.id)
+        }
+
+        holder.itemView.setOnClickListener {
+            publishSubjectForEdit.onNext(record.id)
         }
     }
 

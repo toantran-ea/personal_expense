@@ -14,4 +14,8 @@ class RecordViewModel(private val dataSource: RecordDao) : ViewModel() {
     fun saveRecord(record: Record) : Completable {
         return dataSource.insertRecord(record)
     }
+
+    fun updateRecord(record: Record): Completable {
+        return dataSource.insertRecord(record)
+    }
 }

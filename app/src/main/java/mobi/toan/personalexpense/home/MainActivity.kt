@@ -75,6 +75,21 @@ class MainActivity : AppCompatActivity() {
                 },
                 { t -> Log.e(TAG, t?.message) })
             .also { compositeDisposable.add(it) }
+
+        viewAdapter.onItemEdited()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Log.e("SHIT", "aaaa $it")
+                    editRecord(it)
+                },
+                { t -> Log.e(TAG, t?.message) })
+            .also { compositeDisposable.add(it) }
+    }
+
+    private fun editRecord(id: String) {
+        startActivity(AddRecordActivity.getIntent(this@MainActivity, id))
     }
 
     private fun confirmDelete(id: String) {
@@ -128,8 +143,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addNewRecord() {
-        val intent = Intent(this, AddRecordActivity::class.java)
-        startActivity(intent)
+        startActivity(AddRecordActivity.getIntent(this, null))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,5 +1,7 @@
 package mobi.toan.personalexpense.addrecord
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -28,12 +30,18 @@ class AddRecordActivity : AppCompatActivity() {
 
     private var selectedDate: Date = Calendar.getInstance().time
 
+    private var editedRecordId: String? = null
+
+    private var editedRecord: Record? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_record)
         viewModelFactory = Injection.provideViewModelFactory(this)
         viewModel = viewModelFactory.create(RecordViewModel::class.java)
+        if (intent.hasExtra(RECORD_ID)) {
+            editedRecordId = intent.getStringExtra(RECORD_ID)
+        }
         initViews()
     }
 
@@ -46,7 +54,11 @@ class AddRecordActivity : AppCompatActivity() {
 
         amount_input.addTextChangedListener(object : VoidTextWatcher() {
             override fun afterTextChanged(p0: Editable?) {
-                preview_amount.text = NumberUtils.displayFormatedNumber((p0?.toString() ?: "0").toDouble())
+                preview_amount.text = try {
+                    NumberUtils.displayFormatedNumber((p0?.toString() ?: "0").toDouble())
+                } catch (ex: Exception) {
+                    "0"
+                }
             }
         })
 
@@ -66,13 +78,40 @@ class AddRecordActivity : AppCompatActivity() {
                 }
             }
         }
+
+        editedRecordId?.let {
+            viewModel.recordById(it)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ record ->
+                    amount_input.setText(record.amount.toString())
+                    preview_amount.text = NumberUtils.displayFormatedNumber(record.amount)
+                    note_input.setText(record.note)
+                    editedRecord = record
+                    selectedDate = record.date
+                }, { t ->
+                    Log.e(TAG, t?.message)
+                })
+        }
     }
 
     private fun saveRecord(cost: Double, text: String) {
         if (cost <= 0.0 || text.isEmpty()) {
             return Toast.makeText(this, "Invalid record found!", Toast.LENGTH_SHORT).show()
         }
-        viewModel.saveRecord(Record(note = text, amount = cost, date = selectedDate))
+        val record = if (editedRecord != null) {
+            val nonNull = editedRecord!!
+            Record(
+                nonNull.id, text, cost,
+                nonNull.created,
+                Calendar.getInstance().time,
+                selectedDate,
+                nonNull.currency
+            )
+        } else {
+            Record(note = text, amount = cost, date = selectedDate)
+        }
+        viewModel.saveRecord(record)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -87,5 +126,21 @@ class AddRecordActivity : AppCompatActivity() {
     override fun onStop() {
         compositeDisposable.dispose()
         super.onStop()
+    }
+
+    companion object {
+        private const val RECORD_ID = "record-id"
+        private const val TAG = "AddRecordScreen"
+
+        fun getIntent(from: Context, id: String?): Intent {
+            return if (id != null) {
+                Intent(from, AddRecordActivity::class.java)
+                    .apply {
+                        putExtra(RECORD_ID, id)
+                    }
+            } else {
+                Intent(from, AddRecordActivity::class.java)
+            }
+        }
     }
 }
