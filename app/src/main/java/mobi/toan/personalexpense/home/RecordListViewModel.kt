@@ -22,10 +22,11 @@ class RecordListViewModel(private val dataSource: RecordDao) : ViewModel() {
     fun daysSum(): Single<Pair<Double, Double>> {
         val todayBounds = todayBounds()
         val yesterdayBounds = yesterdayBounds()
-        Log.e("TAG", todayBounds.toString())
-        Log.e("TAG", yesterdayBounds.toString())
+        Log.e(TAG, todayBounds.toString())
+        Log.e(TAG, yesterdayBounds.toString())
         return dataSource.sumPeriod(
-            Date(todayBounds.first), Date(todayBounds.second))
+            Date(todayBounds.first), Date(todayBounds.second)
+        )
             .zipWith(
                 dataSource.sumPeriod(Date(yesterdayBounds.first), Date(yesterdayBounds.second)),
                 BiFunction { today, yesterday ->
@@ -36,5 +37,9 @@ class RecordListViewModel(private val dataSource: RecordDao) : ViewModel() {
 
     fun deleteNoteById(id: String) {
         return dataSource.deleteByIdSync(id)
+    }
+
+    companion object {
+        const val TAG = "RecordListViewModel"
     }
 }

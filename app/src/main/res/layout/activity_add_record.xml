@@ -33,7 +33,31 @@
     <Button
         android:layout_gravity="center"
         android:id="@+id/save_button"
-        android:text="Save"
+        android:text="@string/save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <Button
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/yesterday_button"
+            android:text="@string/yesterday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_gravity="center"
+            android:layout_weight="1"
+
+            android:id="@+id/choose_date_button"
+            android:text="@string/choose"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </LinearLayout>

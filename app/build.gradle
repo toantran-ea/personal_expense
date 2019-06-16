@@ -58,6 +58,7 @@ dependencies {
 
     // dialog
     implementation 'com.afollestad.material-dialogs:core:3.0.0-rc3'
+    implementation 'com.afollestad.material-dialogs:datetime:3.0.0-rc4'
 
     // firebase db
     implementation 'com.google.firebase:firebase-database:17.0.0'

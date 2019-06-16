@@ -10,7 +10,7 @@ import java.util.*
 
 @Dao
 interface RecordDao {
-    @Query("SELECT * FROM records ORDER BY updated DESC")
+    @Query("SELECT * FROM records ORDER BY date DESC, updated DESC")
     fun getAllRecords(): Single<List<Record>>
 
     @Query("SELECT * FROM records WHERE recordid = :id")
