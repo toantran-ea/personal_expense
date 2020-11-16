@@ -1,5 +1,5 @@
 ### Personal Expense app 
-
+![Playground](arts/playground.jpg)
 This repository is to help demonstrate the best practices in Android Development and also the playground for me to 
 try new things in development.
 
