@@ -6,6 +6,7 @@ try new things in development.
 What are at the core of this project:
 
 - [ ] MVI 
+- [ ] Clean Code
 - [x] Purely Kotlin
 - [ ] Unit test and espresso test 
 - [ ] Test coverage setup with [Coveralls](https://coveralls.io/)
