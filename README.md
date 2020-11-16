@@ -5,10 +5,10 @@ try new things in development.
 
 What are at the core of this project:
 
-- [x] MVVP
+- [] MVI 
 - [x] Purely Kotlin
 - [ ] Unit test and espresso test 
 - [ ] Test coverage setup with [Coveralls](https://coveralls.io/)
 - [ ] CI/CD with TravisCI
-- [ ] Koin as DI.
-- [ ] Feature based structure. 
+- [ ] Koin as DI. (still Dagger2 now, but will migrate to another branch to play with Hilt/Koin soon) 
+- [x] Feature based structure. 
