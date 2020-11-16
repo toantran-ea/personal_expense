@@ -1,18 +1,18 @@
-package mobi.toan.personalexpense.home
+package mobi.toan.personalexpense.features.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.functions.BiFunction
-import mobi.toan.personalexpense.persistent.Record
-import mobi.toan.personalexpense.persistent.RecordDao
+import mobi.toan.personalexpense.datastorage.models.RecordModel
+import mobi.toan.personalexpense.datastorage.repos.RecordRepo
 import mobi.toan.personalexpense.utils.DateTimeUtils.todayBounds
 import mobi.toan.personalexpense.utils.DateTimeUtils.yesterdayBounds
 import java.util.*
+import javax.inject.Inject
 
-class RecordListViewModel(private val dataSource: RecordDao) : ViewModel() {
-    fun recordList(): Single<List<Record>> {
+class RecordListViewModel @Inject constructor(private val dataSource: RecordRepo) : ViewModel() {
+    fun recordList(): Single<List<RecordModel>> {
         return dataSource.getAllRecords()
     }
 

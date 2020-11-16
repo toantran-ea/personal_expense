@@ -2,11 +2,13 @@ package mobi.toan.personalexpense
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import mobi.toan.personalexpense.addrecord.RecordViewModel
-import mobi.toan.personalexpense.home.RecordListViewModel
-import mobi.toan.personalexpense.persistent.RecordDao
+import mobi.toan.personalexpense.datastorage.repos.RecordRepo
+import mobi.toan.personalexpense.features.addrecord.RecordViewModel
+import mobi.toan.personalexpense.features.home.RecordListViewModel
+import javax.inject.Inject
 
-class ViewModelFactory(private val recordDataSource: RecordDao) :  ViewModelProvider.Factory{
+class ViewModelFactory @Inject constructor(private val recordDataSource: RecordRepo) :
+    ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RecordListViewModel::class.java)) {
             return RecordListViewModel(recordDataSource) as T

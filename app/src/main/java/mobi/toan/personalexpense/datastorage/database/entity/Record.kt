@@ -1,8 +1,9 @@
-package mobi.toan.personalexpense.persistent
+package mobi.toan.personalexpense.datastorage.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import mobi.toan.personalexpense.datastorage.database.CurrencyType
 import java.util.*
 
 

@@ -1,4 +1,4 @@
-package mobi.toan.personalexpense.addrecord
+package mobi.toan.personalexpense.features.addrecord
 
 import android.content.Context
 import android.content.Intent
@@ -13,18 +13,21 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_record.*
-import mobi.toan.personalexpense.Injection
 import mobi.toan.personalexpense.R
 import mobi.toan.personalexpense.ViewModelFactory
-import mobi.toan.personalexpense.persistent.Record
+import mobi.toan.personalexpense.datastorage.models.RecordModel
+import mobi.toan.personalexpense.di.DaggerApplicationComponent
 import mobi.toan.personalexpense.utils.NumberUtils
 import mobi.toan.personalexpense.utils.VoidTextWatcher
 import java.util.*
+import javax.inject.Inject
 
 class AddRecordActivity : AppCompatActivity() {
-    private lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: RecordViewModel
+
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -32,12 +35,14 @@ class AddRecordActivity : AppCompatActivity() {
 
     private var editedRecordId: String? = null
 
-    private var editedRecord: Record? = null
+    private var editedRecord: RecordModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_record)
-        viewModelFactory = Injection.provideViewModelFactory(this)
+
+        DaggerApplicationComponent.create().inject(this)
+
         viewModel = viewModelFactory.create(RecordViewModel::class.java)
         if (intent.hasExtra(RECORD_ID)) {
             editedRecordId = intent.getStringExtra(RECORD_ID)
@@ -101,7 +106,7 @@ class AddRecordActivity : AppCompatActivity() {
         }
         val record = if (editedRecord != null) {
             val nonNull = editedRecord!!
-            Record(
+            RecordModel(
                 nonNull.id, text, cost,
                 nonNull.created,
                 Calendar.getInstance().time,
@@ -109,7 +114,7 @@ class AddRecordActivity : AppCompatActivity() {
                 nonNull.currency
             )
         } else {
-            Record(note = text, amount = cost, date = selectedDate)
+            RecordModel(note = text, amount = cost, date = selectedDate)
         }
         viewModel.saveRecord(record)
             .subscribeOn(Schedulers.io())

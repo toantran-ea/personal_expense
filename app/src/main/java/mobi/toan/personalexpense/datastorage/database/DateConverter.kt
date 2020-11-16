@@ -1,4 +1,4 @@
-package mobi.toan.personalexpense.persistent
+package mobi.toan.personalexpense.datastorage.database
 
 import androidx.room.TypeConverter
 import java.util.*

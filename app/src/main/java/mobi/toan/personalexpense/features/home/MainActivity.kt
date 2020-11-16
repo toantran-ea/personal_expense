@@ -1,13 +1,13 @@
-package mobi.toan.personalexpense.home
+package mobi.toan.personalexpense.features.home
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -17,16 +17,17 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import mobi.toan.personalexpense.Injection
 import mobi.toan.personalexpense.R
 import mobi.toan.personalexpense.ViewModelFactory
-import mobi.toan.personalexpense.addrecord.AddRecordActivity
+import mobi.toan.personalexpense.di.DaggerApplicationComponent
+import mobi.toan.personalexpense.features.addrecord.AddRecordActivity
 import mobi.toan.personalexpense.utils.NumberUtils
-import androidx.recyclerview.widget.DividerItemDecoration
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var viewModelFactory: ViewModelFactory
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     private lateinit var viewModel: RecordListViewModel
 
@@ -38,10 +39,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DaggerApplicationComponent.create().inject(this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        viewModelFactory = Injection.provideViewModelFactory(this)
         viewModel = viewModelFactory.create(RecordListViewModel::class.java)
         initViews()
     }

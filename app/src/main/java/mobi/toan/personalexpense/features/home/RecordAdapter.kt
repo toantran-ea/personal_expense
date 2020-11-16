@@ -1,4 +1,4 @@
-package mobi.toan.personalexpense.home
+package mobi.toan.personalexpense.features.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +10,11 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_record.view.*
 import mobi.toan.personalexpense.R
-import mobi.toan.personalexpense.persistent.Record
+import mobi.toan.personalexpense.datastorage.models.RecordModel
 import mobi.toan.personalexpense.utils.DateTimeUtils.displayBeautyDate
 import mobi.toan.personalexpense.utils.NumberUtils
-import kotlin.collections.ArrayList
 
-class RecordAdapter(private val records: MutableList<Record> = ArrayList()) :
+class RecordAdapter(private val records: MutableList<RecordModel> = ArrayList()) :
     RecyclerView.Adapter<RecordAdapter.MyViewHolder>() {
 
     private val publishSubjectForDelete: PublishSubject<String> = PublishSubject.create()
@@ -38,7 +37,7 @@ class RecordAdapter(private val records: MutableList<Record> = ArrayList()) :
         return publishSubjectForEdit.hide()
     }
 
-    fun updateRecords(updated: List<Record>) {
+    fun updateRecords(updated: List<RecordModel>) {
         records.clear()
         records.addAll(updated)
         notifyDataSetChanged()

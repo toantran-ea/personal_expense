@@ -1,4 +1,4 @@
-package mobi.toan.personalexpense.persistent
+package mobi.toan.personalexpense.datastorage.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import io.reactivex.Completable
 import io.reactivex.Single
+import mobi.toan.personalexpense.datastorage.database.entity.Record
 import java.util.*
 
 @Dao
@@ -17,10 +18,10 @@ interface RecordDao {
     fun getRecordById(id: String): Single<Record>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRecord(user: Record): Completable
+    fun insertRecord(record: Record): Completable
 
     @Query("DELETE FROM records")
-    fun deteleAllRecords():  Completable
+    fun deleteAllRecords():  Completable
 
     @Query("DELETE FROM records where recordid = :id")
     fun deleteByIdSync(id: String)

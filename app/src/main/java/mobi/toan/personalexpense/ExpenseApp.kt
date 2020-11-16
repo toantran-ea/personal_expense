@@ -2,6 +2,7 @@ package mobi.toan.personalexpense
 
 import android.annotation.TargetApi
 import android.app.Application
+import android.content.Context
 import android.os.Build
 import java.util.*
 
@@ -14,6 +15,7 @@ class ExpenseApp : Application() {
         } else {
             this.resources.configuration.locale
         }
+        appContext = this
     }
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -23,5 +25,6 @@ class ExpenseApp : Application() {
 
     companion object {
         var locale: Locale? = null
+        var appContext: Context? = null
     }
 }

@@ -1,10 +1,12 @@
-package mobi.toan.personalexpense.persistent
+package mobi.toan.personalexpense.datastorage.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import mobi.toan.personalexpense.datastorage.database.dao.RecordDao
+import mobi.toan.personalexpense.datastorage.database.entity.Record
 
 @Database(entities = [Record::class], version = 1)
 @TypeConverters(DateConverter::class)
@@ -14,7 +16,10 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
 
-        @Volatile private var INSTANCE: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        const val DB_NAME = "expense.db"
 
         fun getInstance(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
@@ -22,8 +27,9 @@ abstract class AppDatabase : RoomDatabase() {
             }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext,
-                AppDatabase::class.java, "expense.db")
-                .build()
+            Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java, DB_NAME
+            ).build()
     }
 }
