@@ -1,6 +1,6 @@
 ### Personal Expense app 
 
-This repository is the source to help demonstrate the best practice in Android Development and also the playground for me to 
+This repository is to help demonstrate the best practices in Android Development and also the playground for me to 
 try new things in development.
 
 What are at the core of this project:
