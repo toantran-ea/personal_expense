@@ -14,7 +14,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_add_record.*
 import mobi.toan.personalexpense.R
-import mobi.toan.personalexpense.ViewModelFactory
 import mobi.toan.personalexpense.datastorage.models.RecordModel
 import mobi.toan.personalexpense.di.DaggerApplicationComponent
 import mobi.toan.personalexpense.utils.NumberUtils
@@ -24,10 +23,7 @@ import javax.inject.Inject
 
 class AddRecordActivity : AppCompatActivity() {
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    private lateinit var viewModel: RecordViewModel
-
+    lateinit var viewModel: RecordViewModel
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -43,7 +39,6 @@ class AddRecordActivity : AppCompatActivity() {
 
         DaggerApplicationComponent.create().inject(this)
 
-        viewModel = viewModelFactory.create(RecordViewModel::class.java)
         if (intent.hasExtra(RECORD_ID)) {
             editedRecordId = intent.getStringExtra(RECORD_ID)
         }
